@@ -19,14 +19,14 @@ class ComposerServiceProvider extends ServiceProvider
             [
                 '*'
             ],
-            'App\Http\ViewComposers\ThemeComposer'
+            \App\Http\ViewComposers\ThemeComposer::class
         );
 
         View::composer(
             [
                 '*'
             ],
-            'App\Http\ViewComposers\UsersComposer'
+            \App\Http\ViewComposers\UsersComposer::class
         );
 
         View::composer(

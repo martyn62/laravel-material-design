@@ -51,7 +51,7 @@ class Profile extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     /**
@@ -61,6 +61,6 @@ class Profile extends Model
      */
     public function theme()
     {
-        return $this->hasOne('App\Models\Theme');
+        return $this->hasOne(\App\Models\Theme::class);
     }
 }
