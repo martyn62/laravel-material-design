@@ -20,7 +20,7 @@ class Activation extends Model
      * @var array
      */
     protected $guarded = [
-    	'id'
+        'id'
     ];
 
     protected $hidden = [
@@ -33,5 +33,4 @@ class Activation extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

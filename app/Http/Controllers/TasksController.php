@@ -118,7 +118,6 @@ class TasksController extends Controller
         Task::create($task);
 
         return redirect('/tasks')->with('status', 'Task created');
-
     }
 
     /**

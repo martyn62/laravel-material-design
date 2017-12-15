@@ -11,20 +11,19 @@ use Collective\Html\HtmlServiceProvider;
  */
 class MacroServiceProvider extends HtmlServiceProvider
 {
-	/**
-	* Register the application services.
-	*
-	* @return void
-	*/
-	public function register()
-	{
-	    // Macros must be loaded after the HTMLServiceProvider's
-	    // register method is called. Otherwise, csrf tokens
-	    // will not be generated
-		parent::register();
+    /**
+    * Register the application services.
+    *
+    * @return void
+    */
+    public function register()
+    {
+        // Macros must be loaded after the HTMLServiceProvider's
+        // register method is called. Otherwise, csrf tokens
+        // will not be generated
+        parent::register();
 
-	    // Load HTML Macros
-	    require base_path() . '/app/Logic/Macros/HtmlMacros.php';
-
-	}
+        // Load HTML Macros
+        require base_path() . '/app/Logic/Macros/HtmlMacros.php';
+    }
 }

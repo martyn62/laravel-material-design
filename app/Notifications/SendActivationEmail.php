@@ -53,7 +53,6 @@ class SendActivationEmail extends Notification implements ShouldQueue
             ->line(trans('emails.activationThanks'));
 
         return ($message);
-
     }
 
     /**

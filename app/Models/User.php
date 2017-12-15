@@ -72,7 +72,7 @@ class User extends Authenticatable
      */
     public function social()
     {
-        return $this->hasMany('App\Models\Social');
+        return $this->hasMany(\App\Models\Social::class);
     }
 
     /**
@@ -82,7 +82,7 @@ class User extends Authenticatable
      */
     public function profile()
     {
-        return $this->hasOne('App\Models\Profile');
+        return $this->hasOne(\App\Models\Profile::class);
     }
 
 
@@ -90,14 +90,15 @@ class User extends Authenticatable
 
     public function profiles()
     {
-        return $this->belongsToMany('App\Models\Profile')->withTimestamps();
+        return $this->belongsToMany(\App\Models\Profile::class)->withTimestamps();
     }
 
     public function hasProfile($name)
     {
-        foreach($this->profiles as $profile)
-        {
-            if($profile->name == $name) return true;
+        foreach ($this->profiles as $profile) {
+            if ($profile->name == $name) {
+                return true;
+            }
         }
 
         return false;
@@ -112,5 +113,4 @@ class User extends Authenticatable
     {
         return $this->profiles()->detach($profile);
     }
-
 }

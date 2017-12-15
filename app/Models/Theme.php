@@ -22,22 +22,22 @@ class Theme extends Model
      * @var array
      */
     protected $guarded = [
-    	'id'
+        'id'
     ];
 
-	/**
-	 * Fillable fields for a Profile
-	 *
-	 * @var array
-	 */
-	protected $fillable = [
-		'name',
-		'link',
+    /**
+     * Fillable fields for a Profile
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'link',
         'notes',
         'status',
-		'taggable_id',
-		'taggable_type'
-	];
+        'taggable_id',
+        'taggable_type'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -55,7 +55,8 @@ class Theme extends Model
      * @param  array  $data
      * @return array
      */
-    public static function rules ($id=0, $merge=[]) {
+    public static function rules($id = 0, $merge = [])
+    {
         return array_merge(
             [
                 'name'   => 'required|min:3|max:50|unique:themes,name' . ($id ? ",$id" : ''),
@@ -63,7 +64,8 @@ class Theme extends Model
                 'notes'  => 'max:500',
                 'status' => 'required'
             ],
-            $merge);
+            $merge
+        );
     }
 
     /**
@@ -73,7 +75,6 @@ class Theme extends Model
      */
     public function profile()
     {
-        return $this->hasMany('App\Models\Profile');
+        return $this->hasMany(\App\Models\Profile::class);
     }
-
 }

@@ -29,21 +29,17 @@ class ThemeComposer
         $theme = null;
 
         if (Auth::check()) {
-
             $user = $this->user;
 
             if ($user->profile) {
-
                 $theme = Theme::find($user->profile->theme_id);
 
                 if ($theme->status == 0) {
                     $theme = Theme::find(1);
                 }
-
             }
         }
 
         $view->with('theme', $theme);
     }
-
 }

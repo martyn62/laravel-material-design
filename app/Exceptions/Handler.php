@@ -69,12 +69,11 @@ class Handler extends ExceptionHandler
             $exception instanceof \jeremykenedy\LaravelRoles\Exceptions\LevelDeniedException;
 
         if ($userLevelCheck) {
-
             if ($request->expectsJson()) {
-                return Response::json(array(
+                return Response::json([
                     'error'    =>  403,
                     'message'   =>  'Unauthorized.'
-                ), 403);
+                ], 403);
             }
 
             abort(403);
@@ -109,18 +108,13 @@ class Handler extends ExceptionHandler
     public function sendEmail(Exception $exception)
     {
         try {
-
             $e = FlattenException::create($exception);
             $handler = new SymfonyExceptionHandler();
             $html = $handler->getHtml($e);
 
             Mail::send(new ExceptionOccured($html));
-
         } catch (Exception $exception) {
-
             Log::error($exception);
-
         }
     }
-
 }
