@@ -70,10 +70,10 @@ class Handler extends ExceptionHandler
 
         if ($userLevelCheck) {
             if ($request->expectsJson()) {
-                return Response::json(array(
+                return Response::json([
                     'error'    =>  403,
                     'message'   =>  'Unauthorized.'
-                ), 403);
+                ], 403);
             }
 
             abort(403);

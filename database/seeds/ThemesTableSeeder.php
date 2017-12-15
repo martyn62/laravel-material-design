@@ -1172,12 +1172,12 @@ class ThemesTableSeeder extends Seeder
         foreach ($themes as $theme) {
             $newTheme = Theme::where('name', '=', $theme['name'])->first();
             if ($newTheme === null) {
-                $newTheme = Theme::create(array(
+                $newTheme = Theme::create([
                     'name'          => $theme['name'],
                     'link'          => $theme['link'],
                     'taggable_id'   => 0,
                     'taggable_type' => 'theme'
-                ));
+                ]);
             }
         }
 
