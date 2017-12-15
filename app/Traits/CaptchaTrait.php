@@ -5,7 +5,8 @@ namespace App\Traits;
 use Illuminate\Support\Facades\Input;
 use ReCaptcha\ReCaptcha;
 
-trait CaptchaTrait {
+trait CaptchaTrait
+{
 
     public function captchaCheck()
     {
@@ -22,7 +23,5 @@ trait CaptchaTrait {
         }
 
         return false;
-
     }
-
 }

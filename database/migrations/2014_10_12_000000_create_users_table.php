@@ -32,7 +32,6 @@ class CreateUsersTable extends Migration
             $table->ipAddress('deleted_ip_address')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

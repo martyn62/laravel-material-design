@@ -88,5 +88,4 @@ class SoftDeletesController extends Controller
         $user->forceDelete();
         return redirect('/users/deleted/')->with('success', trans('usersmanagement.successDestroy'));
     }
-
 }

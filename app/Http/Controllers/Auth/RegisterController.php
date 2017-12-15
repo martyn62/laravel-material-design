@@ -64,7 +64,8 @@ class RegisterController extends Controller
             $data['captcha'] = true;
         }
 
-        return Validator::make($data,
+        return Validator::make(
+            $data,
             [
                 'name'                  => 'required|max:255|unique:users',
                 'first_name'            => '',
@@ -89,7 +90,6 @@ class RegisterController extends Controller
                 'captcha.min'                   => trans('auth.CaptchaWrong')
             ]
         );
-
     }
 
     /**
@@ -119,6 +119,5 @@ class RegisterController extends Controller
         $this->initiateEmailActivation($user);
 
         return $user;
-
     }
 }

@@ -47,8 +47,7 @@ class Authenticate
 
     public function handle($request, Closure $next, $role)
     {
-        if(!$this->auth->check())
-        {
+        if (!$this->auth->check()) {
             return redirect()->to('/login')
                 ->with('status', 'success')
                 ->with('message', 'Please login.');
@@ -65,7 +64,6 @@ class Authenticate
         // }
 ////////////////
         return $next($request);
-
     }
 
     public function terminate($request, $response)
@@ -74,8 +72,5 @@ class Authenticate
         $user           = Auth::user();
         $currentRoute   = Route::currentRouteName();
         Log::info('Authenticate middlware was used: ' . $currentRoute . '. ', [$user]);
-
     }
-
-
 }

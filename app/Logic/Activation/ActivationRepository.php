@@ -24,11 +24,9 @@ class ActivationRepository
 
         //if user changed activated email to new one
         if ($user->activated) {
-
             $user->update([
                 'activated' => false
             ]);
-
         }
 
         // Create new Activation record for this user
@@ -36,10 +34,10 @@ class ActivationRepository
 
         // Send activation email notification
         self::sendNewActivationEmail($user, $activation->token);
-
     }
 
-    public function createNewActivationToken(User $user) {
+    public function createNewActivationToken(User $user)
+    {
 
         $ipAddress              = new CaptureIpTrait;
         $activation             = new Activation;
@@ -49,19 +47,17 @@ class ActivationRepository
         $activation->save();
 
         return $activation;
-
     }
 
-    public function sendNewActivationEmail(User $user, $token) {
+    public function sendNewActivationEmail(User $user, $token)
+    {
 
         $user->notify(new SendActivationEmail($token));
-
     }
 
     public function deleteExpiredActivations()
     {
 
         Activation::where('created_at', '<=', Carbon::now()->subHours(72))->delete();
-
     }
 }

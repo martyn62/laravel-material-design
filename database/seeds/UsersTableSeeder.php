@@ -43,7 +43,6 @@ class UsersTableSeeder extends Seeder
             $user->profile()->save($profile);
             $user->attachRole($adminRole);
             $user->save();
-
         }
 
         // Seed test user
@@ -74,6 +73,5 @@ class UsersTableSeeder extends Seeder
         //         $user->attachRole($userRole);
         //     }
         // }
-
     }
 }

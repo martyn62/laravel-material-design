@@ -86,7 +86,3 @@ return [
     'emailExceptionView' => 'emails.exception',
 
 ];
-
-
-
-

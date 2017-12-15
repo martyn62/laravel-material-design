@@ -91,13 +91,9 @@ class ProfilesController extends Controller
     public function show($username)
     {
         try {
-
             $user = $this->getUserByUsername($username);
-
         } catch (ModelNotFoundException $exception) {
-
             abort(404);
-
         }
 
         $currentTheme = Theme::find($user->profile->theme_id);
@@ -119,9 +115,7 @@ class ProfilesController extends Controller
     public function edit($username)
     {
         try {
-
             $user = $this->getUserByUsername($username);
-
         } catch (ModelNotFoundException $exception) {
             return view('pages.status')
                 ->with('error', trans('profile.notYourProfile'))
@@ -165,7 +159,7 @@ class ProfilesController extends Controller
         $user = $this->getUserByUsername($username);
         $ipAddress = new CaptureIpTrait;
 
-        if($request->ajax()) {
+        if ($request->ajax()) {
             $profile_validator = $this->profile_validator($convertedData);
         } else {
             $profile_validator = $this->profile_validator($request->all());
@@ -174,7 +168,8 @@ class ProfilesController extends Controller
 
         if ($profile_validator->fails()) {
             $this->throwValidationException(
-                $request, $profile_validator
+                $request,
+                $profile_validator
             );
             return redirect('profile/'.$user->name.'/edit')->withErrors($validator)->withInput();
         }
@@ -184,7 +179,7 @@ class ProfilesController extends Controller
             $profile->fill($input);
             $user->profile()->save($profile);
         } else {
-            if($request->ajax()) {
+            if ($request->ajax()) {
                 $user->profile->fill($convertedData)->save();
                 $user->fill($convertedData);
             } else {
@@ -196,8 +191,7 @@ class ProfilesController extends Controller
         $user->updated_ip_address = $ipAddress->getClientIp();
         $user->save();
 
-        if($request->ajax()) {
-
+        if ($request->ajax()) {
             $theme = Theme::find($user->profile->theme_id);
 
             $returnData = [
@@ -207,7 +201,6 @@ class ProfilesController extends Controller
             ];
 
             return response()->json($returnData, 200);
-
         }
         return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updateSuccess'));
     }
@@ -260,7 +253,8 @@ class ProfilesController extends Controller
 
         if ($validator->fails()) {
             $this->throwValidationException(
-                $request, $validator
+                $request,
+                $validator
             );
         }
 
@@ -293,7 +287,8 @@ class ProfilesController extends Controller
         $user        = User::findOrFail($id);
         $ipAddress   = new CaptureIpTrait;
 
-        $validator = Validator::make($request->all(),
+        $validator = Validator::make(
+            $request->all(),
             [
                 'password'              => 'required|min:6|max:20|confirmed',
                 'password_confirmation' => 'required|same:password',
@@ -307,7 +302,8 @@ class ProfilesController extends Controller
 
         if ($validator->fails()) {
             $this->throwValidationException(
-                $request, $validator
+                $request,
+                $validator
             );
         }
 
@@ -320,7 +316,6 @@ class ProfilesController extends Controller
         $user->save();
 
         return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updatePWSuccess'));
-
     }
 
     /**
@@ -331,7 +326,7 @@ class ProfilesController extends Controller
      */
     public function upload()
     {
-        if(Input::hasFile('file')) {
+        if (Input::hasFile('file')) {
             $currentUser  = \Auth::user();
             $avatar       = Input::file('file');
             $filename     = 'avatar.' . $avatar->getClientOriginalExtension();
@@ -350,7 +345,6 @@ class ProfilesController extends Controller
             $currentUser->profile->save();
 
             return response()->json(['path'=> $path], 200);
-
         } else {
             return response()->json(false, 200);
         }
@@ -364,7 +358,7 @@ class ProfilesController extends Controller
      */
     public function uploadBackground()
     {
-        if(Input::hasFile('file')) {
+        if (Input::hasFile('file')) {
             $currentUser        = \Auth::user();
             $user_profile_bg    = Input::file('file');
             $filename           = 'background.' . $user_profile_bg->getClientOriginalExtension();
@@ -385,7 +379,6 @@ class ProfilesController extends Controller
             $currentUser->profile->save();
 
             return response()->json(['path'=> $path], 200);
-
         } else {
             return response()->json(false, 200);
         }
@@ -428,7 +421,8 @@ class ProfilesController extends Controller
         $user        = User::findOrFail($id);
         $ipAddress   = new CaptureIpTrait;
 
-        $validator = Validator::make($request->all(),
+        $validator = Validator::make(
+            $request->all(),
             [
                 'checkConfirmDelete'            => 'required',
             ],
@@ -439,14 +433,13 @@ class ProfilesController extends Controller
 
         if ($validator->fails()) {
             $this->throwValidationException(
-                $request, $validator
+                $request,
+                $validator
             );
         }
 
         if ($user->id != $currentUser->id) {
-
             return redirect('profile/'.$user->name.'/edit')->with('error', trans('profile.errorDeleteNotYour'));
-
         }
 
         // Create and encrypt user account restore token

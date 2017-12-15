@@ -64,9 +64,9 @@ class ThemesManagementController extends Controller
         $validator = Validator::make($input, Theme::rules());
 
         if ($validator->fails()) {
-
             $this->throwValidationException(
-                $request, $validator
+                $request,
+                $validator
             );
 
             return redirect('themes/create')->withErrors($validator)->withInput();
@@ -85,7 +85,6 @@ class ThemesManagementController extends Controller
         $theme->save();
 
         return redirect('themes/'.$theme->id)->with('success', trans('themes.createSuccess'));
-
     }
 
     /**
@@ -161,9 +160,9 @@ class ThemesManagementController extends Controller
         $validator = Validator::make($input, Theme::rules($id));
 
         if ($validator->fails()) {
-
             $this->throwValidationException(
-                $request, $validator
+                $request,
+                $validator
             );
 
             return redirect('themes/'.$theme->id.'/edit')->withErrors($validator)->withInput();
@@ -172,7 +171,6 @@ class ThemesManagementController extends Controller
         $theme->fill($input)->save();
 
         return redirect('themes/'.$theme->id)->with('success', trans('themes.updateSuccess'));
-
     }
 
     /**
@@ -192,7 +190,6 @@ class ThemesManagementController extends Controller
             return redirect('themes')->with('success', trans('themes.deleteSuccess'));
         }
         return back()->with('error', trans('themes.deleteSelfError'));
-
     }
 
 
@@ -202,13 +199,10 @@ class ThemesManagementController extends Controller
 
 
 
-    public function template() {
+    public function template()
+    {
 
 
         return View('themesmanagement.template');
-
-
     }
-
-
 }
